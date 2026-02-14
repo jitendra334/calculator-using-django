@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Modern Calculator{% endblock %}
+
+{% block extra_css %}
+<style>
+    .calculator-container {
+        max-width: 500px;
+        margin: 2rem auto;
+        padding: 1rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="calculator-container">
+    <div class="calculator-header">
+        <h1><i class="fas fa-calculator"></i> Modern Calculator</h1>
+        <p class="subtitle">Perform basic and scientific calculations</p>
+    </div>
+    
+    <div class="calculator-wrapper">
+        <div class="calculator-display">
+            <div class="display-wrapper">
+                <input type="text" 
+                       id="display" 
+                       class="display-input" 
+                       readonly 
+                       value="0"
+                       placeholder="0">
+                <div class="display-history" id="historyDisplay"></div>
+            </div>
+        </div>
+        
+        <div class="calculator-buttons">
+            <div class="button-row">
+                <button class="btn btn-secondary" onclick="clearDisplay()">C</button>
+                <button class="btn btn-secondary" onclick="backspace()"><i class="fas fa-backspace"></i></button>
+                <button class="btn btn-secondary" onclick="toggleSign()">±</button>
+                <button class="btn btn-operator" onclick="appendToDisplay('/')">÷</button>
+            </div>
+            <div class="button-row">
+                <button class="btn btn-number" onclick="appendToDisplay('7')">7</button>
+                <button class="btn btn-number" onclick="appendToDisplay('8')">8</button>
+                <button class="btn btn-number" onclick="appendToDisplay('9')">9</button>
+                <button class="btn btn-operator" onclick="appendToDisplay('*')">×</button>
+            </div>
+            <div class="button-row">
+                <button class="btn btn-number" onclick="appendToDisplay('4')">4</button>
+                <button class="btn btn-number" onclick="appendToDisplay('5')">5</button>
+                <button class="btn btn-number" onclick="appendToDisplay('6')">6</button>
+                <button class="btn btn-operator" onclick="appendToDisplay('-')">−</button>
+            </div>
+            <div class="button-row">
+                <button class="btn btn-number" onclick="appendToDisplay('1')">1</button>
+                <button class="btn btn-number" onclick="appendToDisplay('2')">2</button>
+                <button class="btn btn-number" onclick="appendToDisplay('3')">3</button>
+                <button class="btn btn-operator" onclick="appendToDisplay('+')">+</button>
+            </div>
+            <div class="button-row">
+                <button class="btn btn-number" onclick="appendToDisplay('0')">0</button>
+                <button class="btn btn-number" onclick="appendToDisplay('.')">.</button>
+                <button class="btn btn-equals" onclick="calculateResult()">=</button>
+            </div>
+        </div>
+        
+        <div class="calculator-features">
+            <button class="btn-feature" onclick="copyToClipboard()">
+                <i class="fas fa-copy"></i> Copy Result
+            </button>
+            {% if user.is_authenticated %}
+            <a href="{% url 'calculator:history' %}" class="btn-feature">
+                <i class="fas fa-history"></i> View History
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

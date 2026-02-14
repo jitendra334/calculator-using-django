@@ -1,0 +1,382 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard - Modern Calculator{% endblock %}
+
+{% block extra_css %}
+<style>
+    .dashboard-container {
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 1rem;
+    }
+
+    .dashboard-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .dashboard-header h1 {
+        color: #2c3e50;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .welcome-message {
+        color: #7f8c8d;
+        font-size: 1.1rem;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .stat-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .stat-card.card-2 {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    .stat-card.card-3 {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.95rem;
+        opacity: 0.9;
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .section-header h2 {
+        color: #2c3e50;
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    .section-actions {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .btn-action {
+        padding: 0.5rem 1rem;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-action:hover {
+        background-color: #2980b9;
+    }
+
+    .btn-action.secondary {
+        background-color: #95a5a6;
+    }
+
+    .btn-action.secondary:hover {
+        background-color: #7f8c8d;
+    }
+
+    .calculations-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .calculations-table thead {
+        background-color: #34495e;
+        color: white;
+    }
+
+    .calculations-table th {
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+    }
+
+    .calculations-table td {
+        padding: 1rem;
+        border-bottom: 1px solid #ecf0f1;
+    }
+
+    .calculations-table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .calculation-expression {
+        font-family: 'Courier New', monospace;
+        background-color: #f5f5f5;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+        color: #e74c3c;
+    }
+
+    .calculation-result {
+        font-family: 'Courier New', monospace;
+        font-weight: 600;
+        color: #27ae60;
+    }
+
+    .calculation-time {
+        color: #95a5a6;
+        font-size: 0.9rem;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 3rem 1rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .empty-state-icon {
+        font-size: 3rem;
+        color: #bdc3c7;
+        margin-bottom: 1rem;
+    }
+
+    .empty-state-text {
+        color: #7f8c8d;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    .btn-start {
+        background-color: #27ae60;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-start:hover {
+        background-color: #229954;
+    }
+
+    .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .action-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+    .action-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .action-card a {
+        display: block;
+        color: #3498db;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .action-card i {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    /* Auto-hide alert messages after 3 seconds */
+    .alert {
+        animation: slideInDown 0.3s ease;
+    }
+
+    @keyframes slideInDown {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOutUp {
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+    }
+
+    .alert.fade-out {
+        animation: slideOutUp 0.3s ease forwards;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
+        <p class="welcome-message">Welcome back, <strong>{{ user.first_name|default:user.username }}</strong>! 👋</p>
+    </div>
+
+    {% if messages %}
+    <div class="alerts" style="margin-bottom: 2rem;">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">{{ total_calculations }}</div>
+            <div class="stat-label">Total Calculations</div>
+        </div>
+        <div class="stat-card card-2">
+            <div class="stat-number">{{ operations_count }}</div>
+            <div class="stat-label">Different Operations</div>
+        </div>
+    </div>
+
+    <!-- Recent Calculations Section -->
+    <div class="section-header">
+        <h2><i class="fas fa-history"></i> Recent Calculations</h2>
+        <div class="section-actions">
+            <a href="{% url 'calculator:index' %}" class="btn-action">
+                <i class="fas fa-calculator"></i> New Calculation
+            </a>
+            <a href="{% url 'calculator:history' %}" class="btn-action secondary">
+                <i class="fas fa-list"></i> Full History
+            </a>
+        </div>
+    </div>
+
+    {% if recent_calculations %}
+    <table class="calculations-table">
+        <thead>
+            <tr>
+                <th>Expression</th>
+                <th>Result</th>
+                <th>Operation</th>
+                <th>Date & Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for calc in recent_calculations %}
+            <tr>
+                <td><span class="calculation-expression">{{ calc.expression }}</span></td>
+                <td><span class="calculation-result">{{ calc.result }}</span></td>
+                <td>{{ calc.get_operation_display }}</td>
+                <td><span class="calculation-time">{{ calc.created_at|date:"M d, Y H:i" }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-state-icon">
+            <i class="fas fa-inbox"></i>
+        </div>
+        <div class="empty-state-text">
+            No calculations yet. Start calculating now!
+        </div>
+        <a href="{% url 'calculator:index' %}" class="btn-start">
+            <i class="fas fa-calculator"></i> Go to Calculator
+        </a>
+    </div>
+    {% endif %}
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <div class="action-card">
+            <i class="fas fa-calculator" style="color: #3498db;"></i>
+            <a href="{% url 'calculator:index' %}">Start Calculating</a>
+        </div>
+        <div class="action-card">
+            <i class="fas fa-history" style="color: #e74c3c;"></i>
+            <a href="{% url 'calculator:history' %}">View History</a>
+        </div>
+        <div class="action-card">
+            <i class="fas fa-info-circle" style="color: #27ae60;"></i>
+            <a href="{% url 'calculator:about' %}">About Calculator</a>
+        </div>
+        <div class="action-card">
+            <i class="fas fa-sign-out-alt" style="color: #f39c12;"></i>
+            <a href="{% url 'calculator:logout' %}">Logout</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Auto-hide alert messages after 3 seconds
+    document.addEventListener('DOMContentLoaded', function() {
+        const alerts = document.querySelectorAll('.alerts .alert');
+        if (alerts.length > 0) {
+            setTimeout(() => {
+                alerts.forEach(alert => {
+                    alert.classList.add('fade-out');
+                    setTimeout(() => {
+                        alert.remove();
+                    }, 300);
+                });
+            }, 3000);
+        }
+    });
+</script>
+{% endblock %}

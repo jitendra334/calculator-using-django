@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Calculator{% endblock %}
+
+{% block content %}
+<div class="about-container">
+    <div class="about-header">
+        <h1><i class="fas fa-info-circle"></i> About ModernCalc</h1>
+        <p class="subtitle">A powerful calculator built with Django</p>
+    </div>
+    
+    <div class="about-content">
+        <div class="about-section">
+            <div class="about-card">
+                <i class="fas fa-code"></i>
+                <h3>Built with Django</h3>
+                <p>This calculator application is built using Django, a high-level Python web framework.</p>
+            </div>
+            
+            <div class="about-card">
+                <i class="fas fa-feather-alt"></i>
+                <h3>Modern Design</h3>
+                <p>Featuring a clean, responsive design with an intuitive user interface.</p>
+            </div>
+            
+            <div class="about-card">
+                <i class="fas fa-cogs"></i>
+                <h3>Multiple Functions</h3>
+                <p>Perform basic arithmetic operations with ease and precision.</p>
+            </div>
+        </div>
+        
+        <div class="features-section">
+            <h2><i class="fas fa-star"></i> Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h4><i class="fas fa-calculator"></i> Basic Operations</h4>
+                    <p>Addition, subtraction, multiplication, division, and more.</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-history"></i> History Tracking</h4>
+                    <p>Save and review your calculation history (requires login).</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-mobile-alt"></i> Responsive Design</h4>
+                    <p>Works perfectly on desktop, tablet, and mobile devices.</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-keyboard"></i> Keyboard Support</h4>
+                    <p>Use your keyboard for faster calculations with shortcut keys.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="about-footer">
+        <p>This project is open source. Feel free to modify for your own use!</p>
+        <a href="{% url 'calculator:index' %}" class="btn btn-primary">
+            <i class="fas fa-calculator"></i> Start Calculating
+        </a>
+    </div>
+</div>
+{% endblock %}

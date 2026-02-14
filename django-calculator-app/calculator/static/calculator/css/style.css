@@ -1,0 +1,635 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* App Header */
+.app-header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4361ee;
+}
+
+.logo i {
+    font-size: 2rem;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #212529;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    background-color: #4361ee;
+    color: white;
+}
+
+.user-greeting {
+    color: #6c757d;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.login-btn, .logout-btn, .register-btn {
+    padding: 0.5rem 1.5rem !important;
+    border-radius: 25px !important;
+}
+
+.login-btn {
+    background-color: #4361ee;
+    color: white !important;
+}
+
+.register-btn {
+    background-color: #27ae60;
+    color: white !important;
+}
+
+.logout-btn {
+    background-color: #ef233c;
+    color: white !important;
+}
+
+/* Main Content */
+.main-content {
+    min-height: calc(100vh - 140px);
+    padding: 2rem 0;
+}
+
+/* Calculator Styles */
+.calculator-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.calculator-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.calculator-header h1 {
+    color: #4361ee;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Calculator Display */
+.calculator-display {
+    margin-bottom: 1.5rem;
+}
+
+.display-wrapper {
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    padding: 1rem;
+    border: 2px solid #dee2e6;
+}
+
+.display-input {
+    width: 100%;
+    border: none;
+    background: none;
+    font-size: 2.5rem;
+    color: #212529;
+    text-align: right;
+    outline: none;
+    padding: 0.5rem 0;
+    font-family: monospace;
+}
+
+.display-history {
+    font-size: 0.9rem;
+    color: #6c757d;
+    text-align: right;
+    min-height: 1.5rem;
+    font-family: monospace;
+}
+
+/* Calculator Buttons */
+.calculator-buttons {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.button-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+}
+
+.btn {
+    padding: 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.25rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-number {
+    background-color: #ffffff;
+    color: #212529;
+    border: 2px solid #dee2e6;
+}
+
+.btn-number:hover {
+    background-color: #f8f9fa;
+}
+
+.btn-operator {
+    background-color: #4361ee;
+    color: white;
+}
+
+.btn-operator:hover {
+    background-color: #3a0ca3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #495057;
+}
+
+.btn-equals {
+    background-color: #f72585;
+    color: white;
+    grid-column: span 2;
+}
+
+.btn-equals:hover {
+    background-color: #d9048e;
+}
+
+/* Calculator Features */
+.calculator-features {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.btn-feature {
+    flex: 1;
+    padding: 0.75rem;
+    background-color: white;
+    color: #4361ee;
+    border: 2px solid #4361ee;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    min-width: 150px;
+}
+
+.btn-feature:hover {
+    background-color: #4361ee;
+    color: white;
+}
+
+/* History Page */
+.history-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.history-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: #4361ee;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #3a0ca3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #495057;
+}
+
+.btn-danger {
+    background-color: #ef233c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #d90429;
+}
+
+/* History Stats */
+.history-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-card i {
+    font-size: 2rem;
+    color: #4361ee;
+    margin-bottom: 1rem;
+}
+
+.stat-card h3 {
+    font-size: 2rem;
+    color: #212529;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* History Table */
+.history-table-container {
+    overflow-x: auto;
+    margin-bottom: 2rem;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.history-table th {
+    background-color: #f8f9fa;
+    color: #212529;
+    font-weight: 600;
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.history-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+    color: #212529;
+}
+
+.history-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.expression {
+    font-family: monospace;
+    font-weight: 500;
+}
+
+.result {
+    font-family: monospace;
+    font-weight: 700;
+    color: #4361ee;
+}
+
+.operation-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: #4cc9f0;
+    color: white;
+    border-radius: 25px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Empty History */
+.empty-history {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+}
+
+.empty-history h3 {
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.empty-history p {
+    color: #6c757d;
+    margin-bottom: 2rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* About Page */
+.about-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.about-header h1 {
+    color: #4361ee;
+    margin-bottom: 0.5rem;
+}
+
+.about-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.about-card {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.about-card i {
+    font-size: 3rem;
+    color: #4361ee;
+    margin-bottom: 1.5rem;
+}
+
+.about-card h3 {
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.about-card p {
+    color: #6c757d;
+}
+
+/* Features Section */
+.features-section {
+    margin-bottom: 3rem;
+}
+
+.features-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #212529;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.feature-item {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.feature-item h4 {
+    color: #4361ee;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.feature-item p {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* About Footer */
+.about-footer {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.about-footer p {
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+}
+
+/* App Footer */
+.app-footer {
+    background-color: white;
+    padding: 1.5rem 0;
+    border-top: 1px solid #dee2e6;
+}
+
+.app-footer p {
+    text-align: center;
+    color: #6c757d;
+}
+
+/* Messages */
+.messages {
+    margin: 1rem 0;
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.alert-success {
+    background-color: rgba(76, 201, 240, 0.1);
+    border: 1px solid #4cc9f0;
+    color: #4cc9f0;
+}
+
+.alert-error {
+    background-color: rgba(239, 35, 60, 0.1);
+    border: 1px solid #ef233c;
+    color: #ef233c;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .calculator-container {
+        padding: 1rem;
+    }
+    
+    .display-input {
+        font-size: 2rem;
+    }
+    
+    .btn {
+        padding: 0.75rem;
+        min-height: 50px;
+        font-size: 1.1rem;
+    }
+    
+    .history-header,
+    .history-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .nav-menu {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .calculator-container {
+        padding: 0.5rem;
+    }
+    
+    .button-row {
+        gap: 0.5rem;
+    }
+    
+    .btn {
+        min-height: 45px;
+        font-size: 1rem;
+    }
+    
+    .calculator-features {
+        flex-direction: column;
+    }
+    
+    .btn-feature {
+        min-width: auto;
+    }
+}

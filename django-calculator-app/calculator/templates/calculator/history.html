@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Calculation History{% endblock %}
+
+{% block content %}
+<div class="history-container">
+    <div class="history-header">
+        <h1><i class="fas fa-history"></i> Calculation History</h1>
+        <div class="history-actions">
+            {% if calculations %}
+            <button class="btn btn-danger" onclick="clearHistory()">
+                <i class="fas fa-trash"></i> Clear All History
+            </button>
+            {% endif %}
+            <a href="{% url 'calculator:index' %}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Calculator
+            </a>
+        </div>
+    </div>
+    
+    {% if calculations %}
+    <div class="history-stats">
+        <div class="stat-card">
+            <i class="fas fa-calculator"></i>
+            <h3>{{ calculations.count }}</h3>
+            <p>Total Calculations</p>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-user"></i>
+            <h3>{{ user.username }}</h3>
+            <p>User</p>
+        </div>
+    </div>
+    
+    <div class="history-table-container">
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Expression</th>
+                    <th>Result</th>
+                    <th>Operation</th>
+                    <th>Date & Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for calc in calculations %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td class="expression">{{ calc.expression }}</td>
+                    <td class="result">{{ calc.result }}</td>
+                    <td>
+                        <span class="operation-badge">{{ calc.get_operation_display }}</span>
+                    </td>
+                    <td>{{ calc.created_at|date:"M d, Y H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    {% else %}
+    <div class="empty-history">
+        <div class="empty-icon">
+            <i class="fas fa-history"></i>
+        </div>
+        <h3>No Calculation History</h3>
+        <p>Your calculation history will appear here once you start using the calculator.</p>
+        <a href="{% url 'calculator:index' %}" class="btn btn-primary">
+            <i class="fas fa-calculator"></i> Start Calculating
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+function clearHistory() {
+    if (confirm('Are you sure you want to clear all calculation history? This action cannot be undone.')) {
+        fetch('{% url "calculator:clear_history" %}', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
+</script>
+{% endblock %}
